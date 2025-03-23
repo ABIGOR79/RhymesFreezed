@@ -5,7 +5,7 @@ import 'package:poem/router/app_router.gr.dart';
 class AppRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: MyHomeRoute.page, path: '/', children: [
+        AutoRoute(page: MyWidget.page, path: '/', children: [
           AutoRoute(page: SearchRoute.page, path: 'search'),
           AutoRoute(page: FavoriteRoute.page, path: 'favorite'),
           AutoRoute(page: HistoryRoute.page, path: 'history'),

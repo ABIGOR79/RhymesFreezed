@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:poem/api/api.dart';
 import 'package:poem/router/app_router.dart';
+import 'package:poem/ui/test_page/auth.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const PoemApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+  final apiClient = RhymerApiClient.create(apiUrl: dotenv.env['API_URL']);
+  runApp(MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => AuthProvider())],
+      child: PoemApp()));
 }
 
 class PoemApp extends StatefulWidget {
@@ -14,6 +23,7 @@ class PoemApp extends StatefulWidget {
 
 class _PoemAppState extends State<PoemApp> {
   final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
     final primaryColor = Color.fromARGB(255, 226, 13, 88);
